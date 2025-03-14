@@ -1,4 +1,16 @@
+1. Create app
+```
 oc create -f https://raw.githubusercontent.com/openshift/origin/master/examples/hello-openshift/hello-pod.json
+```
+2. Create service
+```
+oc expose pod/hello-openshift
+```
+3. Create route insecure
+```
+oc expose svc hello-openshift
+```
+4. Create ingress - insecure
 ```
 ---
 apiVersion: networking.k8s.io/v1
@@ -19,6 +31,8 @@ spec:
                 name: hello-openshift
                 port:
                   number: 8080
+```
+5. Create ingress - secure
 ```
 ---
 apiVersion: networking.k8s.io/v1
@@ -43,3 +57,4 @@ spec:
                 name: hello-openshift
                 port:
                   number: 8080
+```
